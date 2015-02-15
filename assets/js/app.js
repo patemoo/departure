@@ -9,6 +9,10 @@ app.config(['$routeProvider','$locationProvider', function($routeProvider,$locat
   .when('/',{
     templateUrl: '/views/home.html',
     controller: 'HomeCtrl'
+  })
+  .when('/dashboard',{
+    templateUrl: '/views/dashboard.html',
+    controller: 'DashboardCtrl'
   });
 
 }]);
