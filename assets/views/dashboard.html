@@ -1,3 +1,70 @@
-<div class="container" ng-controller="DashboardCtrl">
-  <h1>{{page}} page</h1>
-</div>
+<div class="dashboard-wrapper">
+
+  <div class="container" ng-controller="DashboardCtrl">
+    <section class="flight-wrapper">
+      <span>Airline: {{flightInfo.carrier.name}}</span>
+      <span>Flight #: {{flightInfo.flightNumber}}</span>
+    </section>
+
+    <section class="toggle-wrapper clearfix">
+      <div class="col-xs-6">
+        <span class="departure" ng-click="togglePannel('departure')" ng-class="{show:(showPannel == 'departure')}">Departure</span>
+      </div>
+      <div class="col-xs-6">
+        <span class="arrival" ng-click="togglePannel('arrival')" ng-class="{show:(showPannel == 'arrival')}">Arrival</span>
+      </div>
+    </section>
+
+
+    <div class="col-sm-6 pannel departure-wrapper" ng-class="{show:(showPannel == 'departure')}">
+      <section class="airport-wrapper">
+        <h1>{{flightInfo.departureAirport.cityCode}}</h1>
+        <span>{{flightInfo.departureAirport.name}}</span>
+
+      </section>
+      <section class="local-wrapper clearfix">
+        <div class="local-stat"></div>
+        <div class="local-stat"></div>
+        <div class="local-stat"></div>
+
+        <div class="map-wrapper"></div>
+
+        <div class="weather-wrapper"></div>
+
+      </section>
+      <section class="services-wrapper">
+        <h3>Transportation</h3>
+
+
+        <h3>Food</h3>
+
+      </section>
+    </div>
+
+    <div class="col-sm-6 pannel arrival-wrapper" ng-class="{show:(showPannel == 'arrival')}">
+      <section class="airport-wrapper">
+        <h1>{{flightInfo.arrivalAirport.cityCode}}</h1>
+        <span>{{flightInfo.arrivalAirport.name}}</span>
+      </section>
+      <section class="local-wrapper clearfix">
+        <div class="local-stat"></div>
+        <div class="local-stat"></div>
+        <div class="local-stat"></div>
+
+        <div class="map-wrapper"></div>
+
+        <div class="weather-wrapper"></div>
+
+      </section>
+      <section class="services-wrapper">
+        <h3>Transportation</h3>
+
+
+        <h3>Food</h3>
+
+      </section>
+    </div>
+  </div>
+
+</div> <!-- dashboard-wrapper -->
+

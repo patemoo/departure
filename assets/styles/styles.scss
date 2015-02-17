@@ -1,0 +1,150 @@
+
+$dashback: rgba(189, 195, 199,.3);
+$localback: rgba(189, 195, 199,1);
+$statback: rgba(46, 204, 113,.8);
+$wrapperback: #fff;
+
+body{
+  background: $dashback;
+}
+
+
+
+.dashboard-wrapper{
+  //background: $dashback;
+
+  .flight-wrapper{
+    background: $wrapperback;
+    min-height: 40px;
+    margin-bottom:2px;
+    padding: 10px 15px;
+    span{
+      margin-right: 20px;
+    }
+  }
+  .toggle-wrapper{
+    div{
+      padding:0;
+      span{
+        display: block;
+        padding: 10px 15px;
+        text-decoration: none;
+        background: $wrapperback;
+        border-bottom: 1px solid $wrapperback;
+        @media screen and (max-width: 768px) {
+          cursor: pointer;
+          border-bottom: 1px solid $dashback;
+          opacity:.6;
+        }
+      }
+      .departure{
+        border-right: 1px solid $dashback;
+      }
+      .arrival{
+        border-left: 1px solid $dashback;
+      }
+      .show{
+        border-bottom: 1px solid $wrapperback;
+        opacity:1.0;
+      }
+    }
+  }
+  .pannel{
+    padding: 20px 0 0 0;
+    background: $wrapperback;
+    min-height: 300px;
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+  }
+  .departure-wrapper{
+    border-right: 1px solid $dashback;
+    @media screen and (max-width: 768px) {
+
+    }
+  }
+  .arrival-wrapper{
+    border-left: 1px solid $dashback;
+    @media screen and (max-width: 768px) {
+
+    }
+  }
+  .show{
+    @media screen and (max-width: 768px) {
+      display: block;
+      border: none;
+    }
+  }
+} // dashboard-wrapper
+
+.airport-wrapper{
+  padding: 0 15px 20px;
+  h1{
+    margin: 0;
+  }
+  span{
+
+  }
+}
+.local-wrapper{
+  background: $localback;
+  min-height: 300px;
+  padding: 2.5%;
+  .local-stat{
+    background: $statback;
+    display: block;
+    float: left;
+    width: 32%;
+    margin-left: 2%;
+    height: 0;
+    padding-bottom: 16%;
+  }
+  .local-stat:first-child{
+    margin-left: 0;
+  }
+  .map-wrapper{
+    background: #333;
+    float: left;
+    min-height: 240px;
+    width: 66%;
+    margin: 10px 2% 0 0;
+    @media screen and (max-width: 992px) {
+      width: 100%;
+    }
+    @media screen and (max-width: 768px) {
+      width: 66%;
+    }
+    @media screen and (max-width: 650px) {
+      width: 100%;
+    }
+  }
+  .weather-wrapper{
+    background: #555;
+    float: left;
+    min-height: 240px;
+    width: 32%;
+    margin-top: 10px;
+    @media screen and (max-width: 992px) {
+      width: 100%;
+      min-height: 140px;
+    }
+    @media screen and (max-width: 768px) {
+      width: 32%;
+      min-height: 240px;
+    }
+    @media screen and (max-width: 650px) {
+      width: 100%;
+      min-height: 140px;
+    }
+  }
+}
+.services-wrapper{
+  padding: 20px 15px;
+  min-height: 300px;
+}
+
+
+
+footer{
+  min-height: 120px;
+}
