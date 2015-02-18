@@ -1,6 +1,6 @@
 <div class="dashboard-wrapper">
 
-  <div class="container" ng-controller="DashboardCtrl">
+  <div class="container">
     <section class="flight-wrapper">
       <span>Airline: {{flightInfo.carrier.name}}</span>
       <span>Flight #: {{flightInfo.flightNumber}}</span>
@@ -27,9 +27,22 @@
         <div class="local-stat"></div>
         <div class="local-stat"></div>
 
-        <div class="map-wrapper"></div>
+        <div id="dMap" class="map-wrapper">
+          <ui-gmap-google-map center='dmap.center' zoom='dmap.zoom'></ui-gmap-google-map>
+        </div>
 
-        <div class="weather-wrapper"></div>
+        <div class="weather-wrapper">
+          <div class="current">
+            <p>{{depCurrent.summary}}</p>
+            <span class="temp">{{depTemp}} &deg;</span>
+            <img ng-src="/images/{{depCurrent.icon || default }}.svg" alt="weather icon"/>
+          </div>
+          <div class="day"></div>
+          <div class="day"></div>
+          <div class="day"></div>
+          <div class="day"></div>
+          <div class="day"></div>
+        </div>
 
       </section>
       <section class="services-wrapper">
@@ -51,14 +64,27 @@
         <div class="local-stat"></div>
         <div class="local-stat"></div>
 
-        <div class="map-wrapper"></div>
+        <div id="aMap" class="map-wrapper">
+          <ui-gmap-google-map center='amap.center' zoom='amap.zoom'></ui-gmap-google-map>
+        </div>
 
-        <div class="weather-wrapper"></div>
+        <div class="weather-wrapper">
+          <div class="current">
+            <p>{{arrCurrent.summary}}</p>
+            <span class="temp">{{arrTemp}} &deg;</span>
+            <img ng-src="/images/{{ arrCurrent.icon || default }}.svg" alt="weather icon"/>
+          </div>
+          <div class="day"></div>
+          <div class="day"></div>
+          <div class="day"></div>
+          <div class="day"></div>
+          <div class="day"></div>
+        </div>
 
       </section>
       <section class="services-wrapper">
         <h3>Transportation</h3>
-
+        {{exchange}}
 
         <h3>Food</h3>
 

@@ -1,12 +1,44 @@
-app.controller('DashboardCtrl', ['$scope', function($scope){
+app.controller('DashboardCtrl', ['$scope','$http','uiGmapGoogleMapApi', function($scope,$http,uiGmapGoogleMapApi){
 
-  var flightStats = {"request":{"flightId":{"requested":"350089626","interpreted":350089626},"extendedOptions":{"requested":"useInlinedReferences","interpreted":"useInlinedReferences"},"url":"http://fhv2svc01.dev.pdx.office:8080/flex/flightstatus/rest/v2/json/flight/status/350089626"},"appendix":{},"flightStatus":{"flightId":350089626,"carrier":{"fs":"AS","iata":"AS","icao":"ASA","name":"Alaska Airlines","phoneNumber":"1-800-252-7522","active":true},"flightNumber":"752","departureAirport":{"fs":"PDX","iata":"PDX","icao":"KPDX","faa":"PDX","name":"Portland International Airport","street1":"7000 NE Airport Way","city":"Portland","cityCode":"PDX","stateCode":"OR","postalCode":"97218","countryCode":"US","countryName":"United States","regionName":"North America","timeZoneRegionName":"America/Los_Angeles","weatherZone":"ORZ006","localTime":"2014-02-03T10:10:28.643","utcOffsetHours":-8.0,"latitude":45.588995,"longitude":-122.592901,"elevationFeet":30,"classification":1,"active":true,"delayIndexUrl":"https://api.flightstats.com/flex/delayindex/rest/v1/json/airports/PDX?codeType=fs","weatherUrl":"https://api.flightstats.com/flex/weather/rest/v1/json/all/PDX?codeType=fs"},"arrivalAirport":{"fs":"ATL","iata":"ATL","icao":"KATL","faa":"ATL","name":"Hartsfield-Jackson Atlanta International Airport","street1":"6000 N Terminal Parkway","street2":"","city":"Atlanta","cityCode":"ATL","stateCode":"GA","postalCode":"30320","countryCode":"US","countryName":"United States","regionName":"North America","timeZoneRegionName":"America/New_York","weatherZone":"GAZ044","localTime":"2014-02-03T13:10:28.643","utcOffsetHours":-5.0,"latitude":33.640067,"longitude":-84.44403,"elevationFeet":1026,"classification":1,"active":true,"delayIndexUrl":"https://api.flightstats.com/flex/delayindex/rest/v1/json/airports/ATL?codeType=fs","weatherUrl":"https://api.flightstats.com/flex/weather/rest/v1/json/all/ATL?codeType=fs"},"departureDate":{"dateLocal":"2014-02-03T09:55:00.000","dateUtc":"2014-02-03T17:55:00.000Z"},"arrivalDate":{"dateLocal":"2014-02-03T17:48:00.000","dateUtc":"2014-02-03T22:48:00.000Z"},"status":"A","operationalTimes":{"flightPlanPlannedDeparture":{"dateLocal":"2014-02-03T09:55:00.000","dateUtc":"2014-02-03T17:55:00.000Z"},"estimatedRunwayDeparture":{"dateLocal":"2014-02-03T09:55:00.000","dateUtc":"2014-02-03T17:55:00.000Z"},"estimatedGateArrival":{"dateLocal":"2014-02-03T17:48:00.000","dateUtc":"2014-02-03T22:48:00.000Z"},"flightPlanPlannedArrival":{"dateLocal":"2014-02-03T16:58:07.000","dateUtc":"2014-02-03T21:58:07.000Z"},"estimatedRunwayArrival":{"dateLocal":"2014-02-03T16:58:29.000","dateUtc":"2014-02-03T21:58:29.000Z"}},"flightDurations":{"scheduledAirMinutes":243},"flightEquipment":{"actualEquipment":{"iata":"B739","name":"??","turboProp":false,"jet":false,"widebody":false,"regional":false}}}}
 
-  $scope.flightInfo = flightStats.flightStatus;
+
+    $http.get('/api/allstats')
+    .success(function(data){
+
+      $scope.flightInfo = data.flightInfo;
+
+      $scope.depCurrent = data.forecast.dep.currently
+      $scope.depTemp = Math.round(data.forecast.dep.currently.temperature);
+      $scope.depDaily = data.forecast.dep.daily
+
+      $scope.arrCurrent = data.forecast.arr.currently
+      $scope.arrTemp = Math.round(data.forecast.arr.currently.temperature);
+      $scope.arrDaily = data.forecast.arr.daily
+
+      $scope.exchange = data.exchange;
+
+      uiGmapGoogleMapApi.then(function(maps) {
+        $scope.dmap = {
+          center: { latitude: data.deplat, longitude: data.deplon },
+          zoom: 10
+        };
+
+        $scope.amap = {
+          center: { latitude: data.arrlat, longitude: data.arrlon },
+          zoom: 10
+        };
+      });
+
+
+
+    }).error(function(err){
+      alert(err);
+    });
+
+
 
 
   $scope.showPannel = 'departure';
-
   $scope.togglePannel = function(pannel) {
     $scope.showPannel = pannel;
   }

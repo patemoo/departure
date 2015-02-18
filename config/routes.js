@@ -38,6 +38,8 @@ module.exports.routes = {
   'delete /api/auth':'AuthController.logout',
   'get /api/auth':'AuthController.check',
 
+  'get /api/allstats':'ApiController.getAll',
+
   'get *':{
     controller:"PagesController",
     action:"index",

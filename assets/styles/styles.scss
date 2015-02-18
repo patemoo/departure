@@ -1,8 +1,9 @@
 
 $dashback: rgba(189, 195, 199,.3);
-$localback: rgba(189, 195, 199,1);
-$statback: rgba(46, 204, 113,.8);
+$localback: rgba(19, 69, 89,.8);
+$statback: rgba(190, 220, 220,.6);
 $wrapperback: #fff;
+$mapred: rgba(150,90,90,1);
 
 body{
   background: $dashback;
@@ -81,6 +82,7 @@ body{
   padding: 0 15px 20px;
   h1{
     margin: 0;
+    color: $mapred;
   }
   span{
 
@@ -108,6 +110,7 @@ body{
     min-height: 240px;
     width: 66%;
     margin: 10px 2% 0 0;
+    position: relative;
     @media screen and (max-width: 992px) {
       width: 100%;
     }
@@ -117,13 +120,19 @@ body{
     @media screen and (max-width: 650px) {
       width: 100%;
     }
+    .angular-google-map-container{
+      width: 100%;
+      min-height: 240px;
+    }
   }
   .weather-wrapper{
-    background: #555;
+    background: #333;
     float: left;
     min-height: 240px;
     width: 32%;
     margin-top: 10px;
+    padding: 10px;
+    color: #fff;
     @media screen and (max-width: 992px) {
       width: 100%;
       min-height: 140px;
@@ -136,14 +145,82 @@ body{
       width: 100%;
       min-height: 140px;
     }
+    .current{
+      text-align: center;
+      @media screen and (max-width: 992px) {
+        width: 40%;
+        float: left;
+      }
+      @media screen and (max-width: 768px) {
+        width: 100%;
+      }
+      @media screen and (max-width: 650px) {
+        width: 40%;
+      }
+      @media screen and (max-width: 420px) {
+        width: 100%;
+      }
+      p{
+        margin: 0;
+        padding: 4px 0;
+        line-height: 100%;
+        border-top: 1px solid rgba(255,255,255,.1);
+        border-bottom: 1px solid rgba(255,255,255,.1);
+      }
+      .temp{
+        padding: 5% 0 0 0;
+        font-size: 30px;
+        display:inline-block;
+        vertical-align: top;
+        width: 40%;
+        max-width: 100px;
+        @media screen and (max-width: 1200px) {
+          padding: 10% 0 0 0;
+          font-size: 20px;
+        }
+        @media screen and (max-width: 992px) {
+
+        }
+        @media screen and (max-width: 768px) {
+          padding: 5% 0 0 0;
+          font-size: 30px;
+        }
+        @media screen and (max-width: 650px) {
+
+        }
+        @media screen and (max-width: 420px) {
+
+        }
+      }
+      img{
+        max-width: 40%;
+        display: inline-block;
+      }
+    }
+    .day{
+      border-top: 1px solid rgba(255,255,255,.1);
+      min-height: 20px;
+      @media screen and (max-width: 992px) {
+        width: 10%;
+        float: left;
+        margin-left: 2%;
+      }
+      @media screen and (max-width: 768px) {
+        width: 100%;
+      }
+      @media screen and (max-width: 650px) {
+        width: 10%;
+      }
+      @media screen and (max-width: 420px) {
+        width: 100%;
+      }
+    }
   }
 }
 .services-wrapper{
   padding: 20px 15px;
   min-height: 300px;
 }
-
-
 
 footer{
   min-height: 120px;
