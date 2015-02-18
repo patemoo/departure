@@ -57,18 +57,6 @@ module.exports = {
     });
 
 
-    // var client = request.createClient('https://api.forecast.io/');
-    // client.get('forecast/'+process.env.FORECAST_KEY+'/'+deplat+','+deplon , function(err, response, body){
-    //   if(!res && res.statusCode == 200) {
-    //     console.log(body);
-    //   }
-    //   res.send(body)
-    // })
-
-
-
-
-
   }
 
 };
