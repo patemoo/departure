@@ -1,6 +1,39 @@
 <div class="dashboard-wrapper">
 
-  <div class="container">
+  <div class="container" ng-hide="flightInfo">
+
+    <form class="form-inline text-center" ng-submit="findFlight()">
+      <div class="form-group">
+        <input type="text" class="form-control" ng-model="searchData.airline" placeholder="Airline" required>
+        <input type="text" class="form-control" ng-model="searchData.flight" placeholder="Flight Number" required>
+        <input type="text" class="form-control" ng-model="searchData.year" placeholder="Year">
+        <select class="form-control" ng-model="searchData.month">
+          <option value="1">January</option>
+          <option value="2">February</option>
+          <option value="3">March</option>
+          <option value="4">April</option>
+          <option value="5">May</option>
+          <option value="6">June</option>
+          <option value="7">July</option>
+          <option value="8">August</option>
+          <option value="9">September</option>
+          <option value="10">October</option>
+          <option value="11">November</option>
+          <option value="12">December</option>
+        </select>
+        <input type="text" class="form-control" ng-model="searchData.day" placeholder="Day">
+        <input type="submit" class="btn btn-default" value="Search">
+      </div>
+    </form>
+
+  </div>
+
+
+
+
+
+
+  <div class="container" ng-show="flightInfo">
     <section class="flight-wrapper">
       <span>Airline: {{flightInfo.carrier.name}}</span>
       <span>Flight #: {{flightInfo.flightNumber}}</span>
@@ -18,14 +51,19 @@
 
     <div class="col-sm-6 pannel departure-wrapper" ng-class="{show:(showPannel == 'departure')}">
       <section class="airport-wrapper">
-        <h1>{{flightInfo.departureAirport.cityCode}}</h1>
+        <h1>{{flightInfo.departureAirport.fs}}</h1>
         <span>{{flightInfo.departureAirport.name}}</span>
 
+       <!--  <h3 ng-hide="takenOff">Your flight leaves in {{hoursTil}} hours!</h3>
+        <p ng-show="takenOff">Your flight is gone.</p>
+ -->
       </section>
       <section class="local-wrapper clearfix">
-        <div class="local-stat"></div>
-        <div class="local-stat"></div>
-        <div class="local-stat"></div>
+        <div ng-show="international">
+          <div class="local-stat"></div>
+          <div class="local-stat"></div>
+          <div class="local-stat"></div>
+        </div>
 
         <div id="dMap" class="map-wrapper">
           <ui-gmap-google-map center='dmap.center' zoom='dmap.zoom'></ui-gmap-google-map>
@@ -37,11 +75,13 @@
             <span class="temp">{{depTemp}} &deg;</span>
             <img ng-src="/images/{{depCurrent.icon || default }}.svg" alt="weather icon"/>
           </div>
-          <div class="day"></div>
-          <div class="day"></div>
-          <div class="day"></div>
-          <div class="day"></div>
-          <div class="day"></div>
+          <div class="week clearfix" ng-repeat="day in depDaily | limitTo: 6 ">
+            <span class="day">{{ (day.time * 1000) | date:'EEE' }}</span>
+            <img class="icon" ng-src="/images/{{day.icon}}.svg" alt="">
+            <span class="temp min"> {{day.temperatureMin | number: 0}}&deg;</span>
+            <span class="temp max">{{day.temperatureMax | number: 0}}&deg;</span>
+          </div>
+
         </div>
 
       </section>
@@ -56,13 +96,16 @@
 
     <div class="col-sm-6 pannel arrival-wrapper" ng-class="{show:(showPannel == 'arrival')}">
       <section class="airport-wrapper">
-        <h1>{{flightInfo.arrivalAirport.cityCode}}</h1>
+        <h1>{{flightInfo.arrivalAirport.fs}}</h1>
         <span>{{flightInfo.arrivalAirport.name}}</span>
+
       </section>
       <section class="local-wrapper clearfix">
-        <div class="local-stat"></div>
-        <div class="local-stat"></div>
-        <div class="local-stat"></div>
+        <div ng-show="international">
+          <div class="local-stat"></div>
+          <div class="local-stat"></div>
+          <div class="local-stat"></div>
+        </div>
 
         <div id="aMap" class="map-wrapper">
           <ui-gmap-google-map center='amap.center' zoom='amap.zoom'></ui-gmap-google-map>
@@ -74,23 +117,27 @@
             <span class="temp">{{arrTemp}} &deg;</span>
             <img ng-src="/images/{{ arrCurrent.icon || default }}.svg" alt="weather icon"/>
           </div>
-          <div class="day"></div>
-          <div class="day"></div>
-          <div class="day"></div>
-          <div class="day"></div>
-          <div class="day"></div>
+          <div class="week clearfix" ng-repeat="day in arrDaily | limitTo: 6 ">
+            <span class="day">{{ (day.time * 1000) | date:'EEE' }}</span>
+            <img class="icon" ng-src="/images/{{day.icon}}.svg" alt="">
+            <span class="temp min"> {{day.temperatureMin | number: 0}}&deg;</span>
+            <span class="temp max">{{day.temperatureMax | number: 0}}&deg;</span>
+          </div>
         </div>
 
       </section>
       <section class="services-wrapper">
         <h3>Transportation</h3>
-        {{exchange}}
+
 
         <h3>Food</h3>
 
       </section>
     </div>
+
   </div>
+
+
 
 </div> <!-- dashboard-wrapper -->
 

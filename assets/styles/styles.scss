@@ -80,6 +80,7 @@ body{
 
 .airport-wrapper{
   padding: 0 15px 20px;
+  min-height: 200px;
   h1{
     margin: 0;
     color: $mapred;
@@ -90,14 +91,14 @@ body{
 }
 .local-wrapper{
   background: $localback;
-  min-height: 300px;
-  padding: 2.5%;
+  //min-height: 100px;
+  padding: 0 2.5% 10px;
   .local-stat{
     background: $statback;
     display: block;
     float: left;
     width: 32%;
-    margin-left: 2%;
+    margin: 10px 0 0 2%;
     height: 0;
     padding-bottom: 16%;
   }
@@ -107,7 +108,7 @@ body{
   .map-wrapper{
     background: #333;
     float: left;
-    min-height: 240px;
+    min-height: 294px;
     width: 66%;
     margin: 10px 2% 0 0;
     position: relative;
@@ -122,13 +123,13 @@ body{
     }
     .angular-google-map-container{
       width: 100%;
-      min-height: 240px;
+      min-height: 294px;
     }
   }
   .weather-wrapper{
     background: #333;
     float: left;
-    min-height: 240px;
+    min-height: 294px;
     width: 32%;
     margin-top: 10px;
     padding: 10px;
@@ -197,9 +198,10 @@ body{
         display: inline-block;
       }
     }
-    .day{
+    .week{
       border-top: 1px solid rgba(255,255,255,.1);
       min-height: 20px;
+
       @media screen and (max-width: 992px) {
         width: 10%;
         float: left;
@@ -213,6 +215,19 @@ body{
       }
       @media screen and (max-width: 420px) {
         width: 100%;
+      }
+      .day,.temp{
+        padding-top:3px;
+        line-height: 150%;
+        display: inline-block;
+      }
+      .temp{
+        float: right;
+        width: 30px;
+      }
+      .icon{
+        max-height: 30px;
+        float: right;
       }
     }
   }
