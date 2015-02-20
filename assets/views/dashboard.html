@@ -1,12 +1,12 @@
 <div class="dashboard-wrapper">
 
-  <div class="container" ng-hide="flightInfo">
+  <div class="container search-wrapper" ng-hide="flightInfo">
 
     <form class="form-inline text-center" ng-submit="findFlight()">
       <div class="form-group">
         <input type="text" class="form-control" ng-model="searchData.airline" placeholder="Airline" required>
         <input type="text" class="form-control" ng-model="searchData.flight" placeholder="Flight Number" required>
-        <input type="text" class="form-control" ng-model="searchData.year" placeholder="Year">
+        <input type="text" class="form-control year" ng-model="searchData.year" placeholder="Year">
         <select class="form-control" ng-model="searchData.month">
           <option value="1">January</option>
           <option value="2">February</option>
@@ -21,7 +21,7 @@
           <option value="11">November</option>
           <option value="12">December</option>
         </select>
-        <input type="text" class="form-control" ng-model="searchData.day" placeholder="Day">
+        <input type="text" class="form-control day" ng-model="searchData.day" placeholder="Day">
         <input type="submit" class="btn btn-default" value="Search">
       </div>
     </form>
@@ -34,9 +34,11 @@
 
 
   <div class="container" ng-show="flightInfo">
-    <section class="flight-wrapper">
-      <span>Airline: {{flightInfo.carrier.name}}</span>
-      <span>Flight #: {{flightInfo.flightNumber}}</span>
+    <section class="flight-wrapper clearfix">
+      <span class="status" ng-class="statusColor">FLIGHT STATUS</span>
+      <span><strong>Flight #:</strong> {{flightInfo.flightNumber}}</span>
+      <span><strong>Airline:</strong> {{flightInfo.carrier.name}}</span>
+      <span class="phone"><strong>Call Airline:</strong> {{flightInfo.carrier.phoneNumber}}</span>
     </section>
 
     <section class="toggle-wrapper clearfix">
@@ -53,9 +55,13 @@
       <section class="airport-wrapper">
         <h1>{{flightInfo.departureAirport.fs}}</h1>
         <span>{{flightInfo.departureAirport.name}}</span>
+        <p>
+          <span><strong>Terminal:</strong> {{flightInfo.airportResources.departureTerminal}}</span>
+          <span><strong>Gate:</strong> {{flightInfo.airportResources.departureGate}}</span>
+        </p>
 
-        <h3 ng-hide="takenOff">Your flight leaves in {{hoursTil}} hours!</h3>
-        <p ng-show="takenOff">Your flight is gone.</p>
+        <h3 class="alert alert-info text-center" ng-hide="takenOff">Your flight leaves in <strong>{{hoursTil}}</strong> hours!</h3>
+        <p class="text-danger"ng-show="takenOff">Your flight has taken off.</p>
 
       </section>
       <section class="local-wrapper clearfix">
@@ -86,18 +92,19 @@
 
       </section>
       <section class="services-wrapper">
-        <h3>Transportation</h3>
+        <!-- <h3>Transportation</h3> -->
 
 
-        <h3>Food</h3>
-
+        <h3>Airport Eats</h3>
         <section class="food-wrapper">
+          <p class="text-danger" ng-show="(depFoursquare.length < 1 )"><em>All options currently closed!</em></p>
           <table class="table">
             <tbody>
               <tr ng-repeat="item in depFoursquare">
                 <td>{{item.venue.name}}</td>
                 <td>{{item.venue.price.currency}}</td>
-                <td>rating: {{item.venue.rating}}</td>
+                <td>{{item.venue.rating}} <rating ng-model="item.venue.rating" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating></td>
+                <td></td>
                 <td><button ng-show="item.venue.hours.isOpen" class="btn btn-success">Open</button></td>
               </tr>
             </tbody>
@@ -111,6 +118,9 @@
       <section class="airport-wrapper">
         <h1>{{flightInfo.arrivalAirport.fs}}</h1>
         <span>{{flightInfo.arrivalAirport.name}}</span>
+        <p>
+          <span><strong>Terminal:</strong> {{flightInfo.airportResources.arrivalTerminal}}</span>
+        </p>
 
       </section>
       <section class="local-wrapper clearfix">
@@ -140,17 +150,18 @@
 
       </section>
       <section class="services-wrapper">
-        <h3>Transportation</h3>
+        <!-- <h3>Transportation</h3> -->
 
 
-        <h3>Food</h3>
+        <h3>Airport Eats</h3>
         <section class="food-wrapper">
+          <p ng-show="(arrFoursquare.length < 1 )"><em>All options currently closed!</em></p>
           <table class="table">
             <tbody>
               <tr ng-repeat="item in arrFoursquare">
                 <td>{{item.venue.name}}</td>
                 <td>{{item.venue.price.currency}}</td>
-                <td>rating: {{item.venue.rating}}</td>
+                <td>{{item.venue.rating}} <rating ng-model="item.venue.rating" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating></td>
                 <td><button ng-show="item.venue.hours.isOpen" class="btn btn-success">Open</button></td>
               </tr>
             </tbody>

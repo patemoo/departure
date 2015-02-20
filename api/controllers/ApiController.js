@@ -121,7 +121,7 @@ module.exports = {
         depFoursquare: function(callback){
           // get foursquare venues
           // https://api.foursquare.com/v2/venues/explore?client_id=KL4M5L1JVEKQY5OFTGUEB43WQYOI2L3TIBEYL23BVHX2QQQW&client_secret=RWLMX1HFXWSU3JIIFEDFPXQXHJI2ZITAA1P2QEXGSPEN1LOT&ll=40.7,-74&query=sushi&v=20140806&m=foursquare
-          request(('https://api.foursquare.com/v2/venues/explore?client_id='+process.env.FOURSQUARE_KEY+'&client_secret='+process.env.FOURSQUARE_SECRET+'&ll='+deplat+','+deplon+'&section=food&v=20140806&m=foursquare&limit=4&openNow=1&radius=250'), function(error, response, body){
+          request(('https://api.foursquare.com/v2/venues/explore?client_id='+process.env.FOURSQUARE_KEY+'&client_secret='+process.env.FOURSQUARE_SECRET+'&ll='+deplat+','+deplon+'&section=food&v=20140806&m=foursquare&limit=6&openNow=1&radius=250'), function(error, response, body){
             if (!error && response.statusCode == 200) {
               depFoursquare = JSON.parse(body);
               callback(null, depFoursquare);
@@ -131,7 +131,7 @@ module.exports = {
         arrFoursquare: function(callback){
           // get foursquare venues
           // https://api.foursquare.com/v2/venues/explore?client_id=KL4M5L1JVEKQY5OFTGUEB43WQYOI2L3TIBEYL23BVHX2QQQW&client_secret=RWLMX1HFXWSU3JIIFEDFPXQXHJI2ZITAA1P2QEXGSPEN1LOT&ll=40.7,-74&query=sushi&v=20140806&m=foursquare
-          request(('https://api.foursquare.com/v2/venues/explore?client_id='+process.env.FOURSQUARE_KEY+'&client_secret='+process.env.FOURSQUARE_SECRET+'&ll='+arrlat+','+arrlon+'&section=food&v=20140806&m=foursquare&limit=4&openNow=1&radius-250'), function(error, response, body){
+          request(('https://api.foursquare.com/v2/venues/explore?client_id='+process.env.FOURSQUARE_KEY+'&client_secret='+process.env.FOURSQUARE_SECRET+'&ll='+arrlat+','+arrlon+'&section=food&v=20140806&m=foursquare&limit=6&openNow=1&radius-250'), function(error, response, body){
             if (!error && response.statusCode == 200) {
               arrFoursquare = JSON.parse(body);
               callback(null, arrFoursquare);

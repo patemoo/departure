@@ -8,7 +8,7 @@ app.controller('DashboardCtrl', ['$scope','$http','uiGmapGoogleMapApi', function
     flight: '100',
     year: d.getFullYear(),
     month: (d.getMonth()+1),
-    day: d.getDate()+1
+    day: d.getDate()
   }
 
   $scope.findFlight = function() {
@@ -19,6 +19,7 @@ app.controller('DashboardCtrl', ['$scope','$http','uiGmapGoogleMapApi', function
 
       // flight info
       $scope.flightInfo = data.flightInfo;
+      $scope.statusColor = 'label label-success';
       $scope.international = (data.flightInfo.departureAirport.countryCode != data.flightInfo.arrivalAirport.countryCode) ? true : false ;
       var currentTime = d.getTime();
       var dTime = (new Date(data.flightInfo.operationalTimes.publishedDeparture.dateLocal)).getTime();
@@ -54,9 +55,11 @@ app.controller('DashboardCtrl', ['$scope','$http','uiGmapGoogleMapApi', function
 
       // foursquare
       $scope.depFoursquare = data.foursquare.dep.response.groups[0].items;
-      // var venue = {venueId: depFoursquare.}
-      // $http.post('/api/getPhotos',)
+      console.log($scope.depFoursquare.length)
       $scope.arrFoursquare = data.foursquare.arr.response.groups[0].items;
+      $scope.max = 10;
+      $scope.isReadyonly = true;
+
 
     }).error(function(err){
       alert(err);
