@@ -6,6 +6,7 @@
  */
 
 var request = require('request');
+var async = require('async');
 
 module.exports = {
 
@@ -22,6 +23,7 @@ module.exports = {
     var depForecast = {};
     var arrForecast = {};
     var exchange = {};
+    var depFoursquare = {};
 
     Flight.findOne({
       airline:req.body.airline,
@@ -44,7 +46,7 @@ module.exports = {
 
         continueAll();
 
-        console.log(found.body);
+        //console.log(found.body);
       } else {
 
         // get flight info
@@ -86,44 +88,79 @@ module.exports = {
 
 
     var continueAll = function() {
-      // get departure forecast
-      request(('https://api.forecast.io/forecast/'+process.env.FORECAST_KEY+'/'+deplat+','+deplon), function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-          depForecast = JSON.parse(body);
 
+      async.parallel({
+
+        // get departure forecast
+        depForecast: function(callback){
+          request(('https://api.forecast.io/forecast/'+process.env.FORECAST_KEY+'/'+deplat+','+deplon), function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+              depForecast = JSON.parse(body);
+              callback(null, depForecast);
+            }
+          });
+        },
+        arrForecast: function(callback){
           // get arrival forecast
           request(('https://api.forecast.io/forecast/'+process.env.FORECAST_KEY+'/'+arrlat+','+arrlon), function (error, response, body) {
             if (!error && response.statusCode == 200) {
               arrForecast = JSON.parse(body);
-
-              // get exchange rate
-              request(('http://openexchangerates.org/api/latest.json?app_id='+process.env.OPEN_EXCHANGE_RATES_KEY), function (error, response, body) {
-                if (!error && response.statusCode == 200) {
-                  exchange = body;
-
-                  res.send({
-                    flightInfo: flightStats,
-                    forecast: {dep:depForecast,arr:arrForecast},
-                    deplat: deplat,
-                    deplon: deplon,
-                    arrlat: arrlat,
-                    arrlon: arrlon,
-                    exchange: exchange
-                  });
-
-                }
-              });
-
+              callback(null, arrForecast);
+            }
+          })
+        },
+        exchange: function(callback){
+          // get exchange rate
+          request(('http://openexchangerates.org/api/latest.json?app_id='+process.env.OPEN_EXCHANGE_RATES_KEY), function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+              exchange = JSON.parse(body);
+              callback(null, exchange);
             }
           });
-
+        },
+        depFoursquare: function(callback){
+          // get foursquare venues
+          // https://api.foursquare.com/v2/venues/explore?client_id=KL4M5L1JVEKQY5OFTGUEB43WQYOI2L3TIBEYL23BVHX2QQQW&client_secret=RWLMX1HFXWSU3JIIFEDFPXQXHJI2ZITAA1P2QEXGSPEN1LOT&ll=40.7,-74&query=sushi&v=20140806&m=foursquare
+          request(('https://api.foursquare.com/v2/venues/explore?client_id='+process.env.FOURSQUARE_KEY+'&client_secret='+process.env.FOURSQUARE_SECRET+'&ll='+deplat+','+deplon+'&section=food&v=20140806&m=foursquare&limit=4&openNow=1&radius=250'), function(error, response, body){
+            if (!error && response.statusCode == 200) {
+              depFoursquare = JSON.parse(body);
+              callback(null, depFoursquare);
+            }
+          });
+        },
+        arrFoursquare: function(callback){
+          // get foursquare venues
+          // https://api.foursquare.com/v2/venues/explore?client_id=KL4M5L1JVEKQY5OFTGUEB43WQYOI2L3TIBEYL23BVHX2QQQW&client_secret=RWLMX1HFXWSU3JIIFEDFPXQXHJI2ZITAA1P2QEXGSPEN1LOT&ll=40.7,-74&query=sushi&v=20140806&m=foursquare
+          request(('https://api.foursquare.com/v2/venues/explore?client_id='+process.env.FOURSQUARE_KEY+'&client_secret='+process.env.FOURSQUARE_SECRET+'&ll='+arrlat+','+arrlon+'&section=food&v=20140806&m=foursquare&limit=4&openNow=1&radius-250'), function(error, response, body){
+            if (!error && response.statusCode == 200) {
+              arrFoursquare = JSON.parse(body);
+              callback(null, arrFoursquare);
+            }
+          });
         }
+
+      },function(err, results){
+
+        res.send({
+          flightInfo: flightStats,
+          forecast: {dep:results.depForecast,arr:results.arrForecast},
+          deplat: deplat,
+          deplon: deplon,
+          arrlat: arrlat,
+          arrlon: arrlon,
+          exchange: results.exchange,
+          foursquare: {dep:results.depFoursquare,arr:results.arrFoursquare}
+        });
+
       });
+
     }
 
-
-
   } // getAll
+
+  // getPhotos: function(req,res) {
+
+  // }
 
 };
 

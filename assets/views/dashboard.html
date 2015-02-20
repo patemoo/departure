@@ -54,9 +54,9 @@
         <h1>{{flightInfo.departureAirport.fs}}</h1>
         <span>{{flightInfo.departureAirport.name}}</span>
 
-       <!--  <h3 ng-hide="takenOff">Your flight leaves in {{hoursTil}} hours!</h3>
+        <h3 ng-hide="takenOff">Your flight leaves in {{hoursTil}} hours!</h3>
         <p ng-show="takenOff">Your flight is gone.</p>
- -->
+
       </section>
       <section class="local-wrapper clearfix">
         <div ng-show="international">
@@ -75,7 +75,7 @@
             <span class="temp">{{depTemp}} &deg;</span>
             <img ng-src="/images/{{depCurrent.icon || default }}.svg" alt="weather icon"/>
           </div>
-          <div class="week clearfix" ng-repeat="day in depDaily | limitTo: 6 ">
+          <div class="week clearfix" ng-repeat="day in depDaily | limitTo: 5 ">
             <span class="day">{{ (day.time * 1000) | date:'EEE' }}</span>
             <img class="icon" ng-src="/images/{{day.icon}}.svg" alt="">
             <span class="temp min"> {{day.temperatureMin | number: 0}}&deg;</span>
@@ -90,6 +90,19 @@
 
 
         <h3>Food</h3>
+
+        <section class="food-wrapper">
+          <table class="table">
+            <tbody>
+              <tr ng-repeat="item in depFoursquare">
+                <td>{{item.venue.name}}</td>
+                <td>{{item.venue.price.currency}}</td>
+                <td>rating: {{item.venue.rating}}</td>
+                <td><button ng-show="item.venue.hours.isOpen" class="btn btn-success">Open</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
 
       </section>
     </div>
@@ -117,7 +130,7 @@
             <span class="temp">{{arrTemp}} &deg;</span>
             <img ng-src="/images/{{ arrCurrent.icon || default }}.svg" alt="weather icon"/>
           </div>
-          <div class="week clearfix" ng-repeat="day in arrDaily | limitTo: 6 ">
+          <div class="week clearfix" ng-repeat="day in arrDaily | limitTo: 5 ">
             <span class="day">{{ (day.time * 1000) | date:'EEE' }}</span>
             <img class="icon" ng-src="/images/{{day.icon}}.svg" alt="">
             <span class="temp min"> {{day.temperatureMin | number: 0}}&deg;</span>
@@ -131,6 +144,18 @@
 
 
         <h3>Food</h3>
+        <section class="food-wrapper">
+          <table class="table">
+            <tbody>
+              <tr ng-repeat="item in arrFoursquare">
+                <td>{{item.venue.name}}</td>
+                <td>{{item.venue.price.currency}}</td>
+                <td>rating: {{item.venue.rating}}</td>
+                <td><button ng-show="item.venue.hours.isOpen" class="btn btn-success">Open</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
 
       </section>
     </div>

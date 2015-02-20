@@ -108,7 +108,7 @@ body{
   .map-wrapper{
     background: #333;
     float: left;
-    min-height: 294px;
+    min-height: 290px;
     width: 66%;
     margin: 10px 2% 0 0;
     position: relative;
@@ -123,13 +123,13 @@ body{
     }
     .angular-google-map-container{
       width: 100%;
-      min-height: 294px;
+      min-height: 290px;
     }
   }
   .weather-wrapper{
     background: #333;
     float: left;
-    min-height: 294px;
+    min-height: 290px;
     width: 32%;
     margin-top: 10px;
     padding: 10px;
@@ -140,7 +140,7 @@ body{
     }
     @media screen and (max-width: 768px) {
       width: 32%;
-      min-height: 240px;
+      min-height: 290px;
     }
     @media screen and (max-width: 650px) {
       width: 100%;
@@ -212,6 +212,7 @@ body{
       }
       @media screen and (max-width: 650px) {
         width: 10%;
+        text-align: center;
       }
       @media screen and (max-width: 420px) {
         width: 100%;
@@ -220,14 +221,66 @@ body{
         padding-top:3px;
         line-height: 150%;
         display: inline-block;
+
+        @media screen and (max-width: 992px) {
+          text-align: center;
+          width:100%;
+        }
+        @media screen and (max-width: 768px) {
+          width: auto;
+        }
+        @media screen and (max-width: 650px) {
+          width:100%;
+        }
+        @media screen and (max-width: 420px) {
+          width: auto;
+          text-align: left;
+        }
+      }
+      .day{
+        @media screen and (max-width: 420px) {
+          float: left;
+        }
       }
       .temp{
         float: right;
         width: 30px;
+        @media screen and (max-width: 1200px) {
+          width: 25px;
+        }
+        @media screen and (max-width: 992px) {
+          text-align: center;
+          width:100%;
+        }
+        @media screen and (max-width: 768px) {
+          width: 30px;
+        }
+        @media screen and (max-width: 650px) {
+          width:100%;
+        }
+        @media screen and (max-width: 420px) {
+          width: 20%;
+        }
       }
       .icon{
         max-height: 30px;
         float: right;
+        display: inline-block;
+        @media screen and (max-width: 1200px) {
+
+        }
+        @media screen and (max-width: 992px) {
+          float: none;
+        }
+        @media screen and (max-width: 768px) {
+          float: right;
+        }
+        @media screen and (max-width: 650px) {
+          float: none;
+        }
+        @media screen and (max-width: 420px) {
+          float: right;
+        }
       }
     }
   }

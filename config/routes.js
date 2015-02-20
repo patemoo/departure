@@ -39,6 +39,7 @@ module.exports.routes = {
   'get /api/auth':'AuthController.check',
 
   'post /api/allstats':'ApiController.getAll',
+  //'post /api/photos':'ApiController.getPhotos',
 
   'get *':{
     controller:"PagesController",
