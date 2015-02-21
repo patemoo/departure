@@ -37,6 +37,8 @@ module.exports = {
 
       if (found) {
 
+        console.log('Flight Found in DB')
+
         flightStats = JSON.parse(found.body).flightStatuses[0];
 
         deplat = flightStats.departureAirport.latitude;
@@ -48,6 +50,8 @@ module.exports = {
 
         //console.log(found.body);
       } else {
+
+        console.log('Calling Flight Stats API')
 
         // get flight info
         request(('https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/status/'+req.body.airline+'/'+req.body.flight+'/dep/'+req.body.year+'/'+req.body.month+'/'+req.body.day+'?appId='+process.env.FLIGHT_STATS_ID+'&appKey='+process.env.FLIGHT_STATS_KEY+'&utc=false&extendedOptions=useInlinedReferences'), function (error, response, body) {

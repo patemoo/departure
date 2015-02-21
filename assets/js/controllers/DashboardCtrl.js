@@ -4,11 +4,11 @@ app.controller('DashboardCtrl', ['$scope','$http', function($scope,$http){ //,'u
   var d = new Date();
 
   $scope.searchData = {
-    airline: 'AA',
-    flight: '7018',
+    airline: 'AS',
+    flight: '460',
     year: d.getFullYear(),
     month: (d.getMonth()+1),
-    day: d.getDate()+2
+    day: d.getDate()+1
   }
 
 
@@ -49,17 +49,7 @@ app.controller('DashboardCtrl', ['$scope','$http', function($scope,$http){ //,'u
       $scope.exchange = data.exchange;
 
       // google maps
-      // uiGmapGoogleMapApi.then(function(maps) {
-      //   $scope.dmap = {
-      //     center: { latitude: data.deplat, longitude: data.deplon },
-      //     zoom: 10
-      //   };
 
-      //   $scope.amap = {
-      //     center: { latitude: data.arrlat, longitude: data.arrlon },
-      //     zoom: 10
-      //   };
-      // });
 
 
       // foursquare

@@ -22,6 +22,7 @@ app.directive('arrmap', function () {
         link: function (scope, element) {
             scope.init = function () {
                 var mapOptions = {
+                    scrollwheel: false,
                     zoom: scope.zoom !== undefined ? scope.zoom : 10,
                     mapTypeId: scope.type !== undefined ? scope.type.toLowerCase() : 'roadmap',
                     streetViewControl: false
@@ -67,7 +68,7 @@ app.directive('arrmap', function () {
                 });
                 directionsDisplay.setMap(map);
 
-                directionsDisplay.setPanel(document.getElementById('arrdirectionsList')); // again need to use angular element thats ugly otherwise.
+                directionsDisplay.setPanel(document.getElementById('arrDirectionsList')); // again need to use angular element thats ugly otherwise.
             };
 
             scope.clearDirections = function () {

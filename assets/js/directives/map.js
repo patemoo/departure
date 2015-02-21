@@ -22,6 +22,7 @@ app.directive('map', function () {
         link: function (scope, element) {
             scope.init = function () {
                 var mapOptions = {
+                    scrollwheel: false,
                     zoom: scope.zoom !== undefined ? scope.zoom : 10,
                     mapTypeId: scope.type !== undefined ? scope.type.toLowerCase() : 'roadmap',
                     streetViewControl: false

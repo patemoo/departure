@@ -11,7 +11,6 @@ module.exports = {
     flightId: {
       type: 'string',
       required: true,
-      unique: true
     },
     airline: {
       type: 'string',

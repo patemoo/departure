@@ -164,6 +164,7 @@ body{
       position: absolute;
       width: 100%;
       bottom: 0;
+      padding: 3px 5px;
     }
   }
   .weather-wrapper{
@@ -328,6 +329,11 @@ body{
 .services-wrapper{
   padding: 20px 15px;
   min-height: 300px;
+  .stars{
+    font-size: 10px;
+    min-width: 100px;
+    display:inline-block;
+  }
 }
 
 footer{
