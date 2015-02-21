@@ -30,6 +30,9 @@ app.directive('arrmap', function () {
                 map = new google.maps.Map(document.getElementById('arrMap'), mapOptions); // todo: use angular-element :)
                 scope.startPoint = scope.origin !== undefined ? scope.origin : '1600 Amphitheatre Parkway, Santa Clara County, CA';
 
+                var trafficLayer = new google.maps.TrafficLayer();
+                trafficLayer.setMap(map);
+
                 geocoder.geocode({
                     address: scope.startPoint
                 }, function (results, status) {

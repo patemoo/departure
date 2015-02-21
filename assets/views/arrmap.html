@@ -1,9 +1,12 @@
 <form novalidate name="arrMapContainer" class="mapContainer form">
   <div id="arrMap"></div>
   <div class="directions input-group" ng-show="directions || directions==undefined">
+    <span class="input-group-btn">
+      <button class="clearDirections btn btn-warning" ng-click="clearDirections()" ng-disabled="arrMapContainer.$invalid">Clear</button>
+    </span>
     <input type="text" class="form-control" ng-model="destination" placeholder="Destination:" required>
     <div class="input-group-btn">
-      <button class="getDirections btn btn-primary" ng-click="getDirections()" ng-disabled="arrMapContainer.$invalid">Get Directions</button>
+      <button class="getDirections btn btn-success" ng-click="getDirections()" ng-disabled="arrMapContainer.$invalid">Go</button>
     </div>
   </div>
 

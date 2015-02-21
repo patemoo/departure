@@ -1,9 +1,13 @@
-<form novalidate name="mapContainer" class="mapContainer form">
+<form novalidate name="mapContainer" class="mapContainer form" ng-submit="getDirections()">
   <div id="depMap"></div>
+
   <div class="directions input-group" ng-show="directions || directions==undefined">
+    <span class="input-group-btn">
+      <button class="clearDirections btn btn-warning" ng-click="clearDirections()" ng-disabled="mapContainer.$invalid">Clear</button>
+    </span>
     <input type="text" class="form-control" ng-model="origin" placeholder="Current Location:" required/>
     <span class="input-group-btn">
-      <button class="getDirections btn btn-primary" ng-click="getDirections()" ng-disabled="mapContainer.$invalid">Get Directions</button>
+      <button class="getDirections btn btn-success" ng-click="getDirections()" ng-disabled="mapContainer.$invalid">Go</button>
     </span>
   </div>
 </form>

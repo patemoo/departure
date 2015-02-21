@@ -1,8 +1,9 @@
 <div class="dashboard-wrapper">
 
-  <div class="container search-wrapper" ng-hide="flightInfo">
 
-  <!-- === Search Form === -->
+  <!-- === Search Wrapper === -->
+
+  <div class="container search-wrapper" ng-hide="flightInfo">
 
     <form class="form-inline text-center" ng-submit="findFlight()">
       <div class="form-group">
@@ -24,7 +25,7 @@
           <option value="12">December</option>
         </select>
         <input type="text" class="form-control day" ng-model="searchData.day" placeholder="Day">
-        <input type="submit" class="btn btn-default" value="Search">
+        <input type="submit" class="btn btn-success" value="Search">
       </div>
     </form>
 
@@ -40,7 +41,8 @@
       <span class="status" ng-class="statusColor">FLIGHT STATUS</span>
       <span><strong>Flight #:</strong> {{flightInfo.flightNumber}}</span>
       <span><strong>Airline:</strong> {{flightInfo.carrier.name}}</span>
-      <span class="phone"><strong>Call Airline:</strong> {{flightInfo.carrier.phoneNumber}}</span>
+      <span class="phone"><strong>Call Airline:</strong>
+      <a href="tel:{{flightInfo.carrier.phoneNumber}}" alt="">{{flightInfo.carrier.phoneNumber}}</a></span>
     </section>
 
     <section class="toggle-wrapper clearfix">
@@ -96,6 +98,8 @@
           </div>
 
         </div>
+
+        <div id="directionsList" class="directions-wrapper clearfix"></div>
 
       </section>
       <section class="services-wrapper">
@@ -159,10 +163,12 @@
           </div>
         </div>
 
+        <div id="arrDirectionsList" class="directions-wrapper clearfix"></div>
+
       </section>
       <section class="services-wrapper">
         <!-- <h3>Directions</h3> -->
-        <div id="arrDirectionsList"></div>
+
 
         <h3>Airport Eats</h3>
         <section class="food-wrapper">
