@@ -1,21 +1,25 @@
-app.controller('DashboardCtrl', ['$scope','$http','uiGmapGoogleMapApi', function($scope,$http,uiGmapGoogleMapApi){
+app.controller('DashboardCtrl', ['$scope','$http', function($scope,$http){ //,'uiGmapGoogleMapApi'
 
 
   var d = new Date();
 
   $scope.searchData = {
     airline: 'AA',
-    flight: '100',
+    flight: '7018',
     year: d.getFullYear(),
     month: (d.getMonth()+1),
-    day: d.getDate()
+    day: d.getDate()+2
   }
+
+
+  $scope.loaded=false;
 
   $scope.findFlight = function() {
 
     $http.post('/api/allstats', $scope.searchData)
     .success(function(data){
 
+      $scope.loaded=true;
 
       // flight info
       $scope.flightInfo = data.flightInfo;
@@ -25,6 +29,10 @@ app.controller('DashboardCtrl', ['$scope','$http','uiGmapGoogleMapApi', function
       var dTime = (new Date(data.flightInfo.operationalTimes.publishedDeparture.dateLocal)).getTime();
       $scope.hoursTil = Math.round((dTime-currentTime)/3600000)
       $scope.takenOff = ($scope.hoursTil < 0) ? true : false ;
+      $scope.deplat = data.flightInfo.departureAirport.latitude;
+      $scope.deplon = data.flightInfo.departureAirport.longitude;
+      $scope.arrlat = data.flightInfo.arrivalAirport.latitude;
+      $scope.arrlon = data.flightInfo.arrivalAirport.longitude;
 
       // weather data
       // departure
@@ -41,17 +49,18 @@ app.controller('DashboardCtrl', ['$scope','$http','uiGmapGoogleMapApi', function
       $scope.exchange = data.exchange;
 
       // google maps
-      uiGmapGoogleMapApi.then(function(maps) {
-        $scope.dmap = {
-          center: { latitude: data.deplat, longitude: data.deplon },
-          zoom: 10
-        };
+      // uiGmapGoogleMapApi.then(function(maps) {
+      //   $scope.dmap = {
+      //     center: { latitude: data.deplat, longitude: data.deplon },
+      //     zoom: 10
+      //   };
 
-        $scope.amap = {
-          center: { latitude: data.arrlat, longitude: data.arrlon },
-          zoom: 10
-        };
-      });
+      //   $scope.amap = {
+      //     center: { latitude: data.arrlat, longitude: data.arrlon },
+      //     zoom: 10
+      //   };
+      // });
+
 
       // foursquare
       $scope.depFoursquare = data.foursquare.dep.response.groups[0].items;

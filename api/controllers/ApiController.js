@@ -158,9 +158,6 @@ module.exports = {
 
   } // getAll
 
-  // getPhotos: function(req,res) {
-
-  // }
 
 };
 

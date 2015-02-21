@@ -135,7 +135,7 @@ body{
   .map-wrapper{
     background: #333;
     float: left;
-    min-height: 290px;
+    height: 290px;
     width: 66%;
     margin: 10px 2% 0 0;
     position: relative;
@@ -151,6 +151,19 @@ body{
     .angular-google-map-container{
       width: 100%;
       min-height: 290px;
+    }
+    #depMap,#arrMap{
+      width: 100%;
+      height: 290px;
+    }
+    .mapContainer{
+      width: 100%;
+
+    }
+    .directions{
+      position: absolute;
+      width: 100%;
+      bottom: 0;
     }
   }
   .weather-wrapper{

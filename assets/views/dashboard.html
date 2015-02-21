@@ -72,7 +72,10 @@
         </div>
 
         <div id="dMap" class="map-wrapper">
-          <ui-gmap-google-map center='dmap.center' zoom='dmap.zoom'></ui-gmap-google-map>
+          <!-- <ui-gmap-google-map center='dmap.center' zoom='dmap.zoom'></ui-gmap-google-map> -->
+          <map ng-if="loaded"  destination="{{deplat}},{{deplon}}"></map>
+
+
         </div>
 
         <div class="weather-wrapper">
@@ -131,7 +134,8 @@
         </div>
 
         <div id="aMap" class="map-wrapper">
-          <ui-gmap-google-map center='amap.center' zoom='amap.zoom'></ui-gmap-google-map>
+          <!-- <ui-gmap-google-map center='amap.center' zoom='amap.zoom'></ui-gmap-google-map> -->
+          <arrmap ng-if="loaded"  origin="{{arrlat}},{{arrlon}}"></arrmap>
         </div>
 
         <div class="weather-wrapper">

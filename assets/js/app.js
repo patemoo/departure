@@ -1,7 +1,7 @@
-var app = angular.module('DepartureApp', ['ui.bootstrap','ngRoute','uiGmapgoogle-maps']);
+var app = angular.module('DepartureApp', ['ui.bootstrap','ngRoute']);
 
 
-app.config(['$routeProvider','$locationProvider','uiGmapGoogleMapApiProvider', function($routeProvider,$locationProvider,uiGmapGoogleMapApiProvider) {
+app.config(['$routeProvider','$locationProvider', function($routeProvider,$locationProvider) {
 
   $locationProvider.html5Mode(true);
 
@@ -21,12 +21,6 @@ app.config(['$routeProvider','$locationProvider','uiGmapGoogleMapApiProvider', f
   .when('/dashboard/:carrier/:flight/:year/:month/:day',{
     templateUrl: '/views/dashboard.html',
     controller: 'DashboardCtrl'
-  });
-
-  uiGmapGoogleMapApiProvider.configure({
-    key: 'AIzaSyAPjSUsygElmxbO4KnA9f1-ECQ2kGpf2jM',
-    v: '3.17',
-    libraries: 'weather,geometry,visualization'
   });
 
 }]);
