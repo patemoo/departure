@@ -36,7 +36,7 @@
 
 
 
-  <div class="container" ng-show="flightInfo">
+  <div class="container" ng-if="loaded">
     <section class="flight-wrapper clearfix">
       <span class="status" ng-class="statusColor">FLIGHT STATUS</span>
       <span><strong>Flight #:</strong> {{flightInfo.flightNumber}}</span>
