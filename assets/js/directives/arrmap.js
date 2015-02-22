@@ -77,7 +77,7 @@ app.directive('arrmap', function () {
             scope.clearDirections = function () {
                 scope.init();
                 directionsDisplay.setPanel(null);
-                scope.origin = '';
+                scope.destination = '';
             };
 
         }

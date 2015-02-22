@@ -25,7 +25,7 @@
           <option value="12">December</option>
         </select>
         <input type="text" class="form-control day" ng-model="searchData.day" placeholder="Day">
-        <input type="submit" class="btn btn-success" value="Search">
+        <input type="submit" class="btn btn-success" value="Get Info">
       </div>
     </form>
 
@@ -41,7 +41,8 @@
       <span class="status" ng-class="statusColor">FLIGHT STATUS</span>
       <span><strong>Flight #:</strong> {{flightInfo.flightNumber}}</span>
       <span><strong>Airline:</strong> {{flightInfo.carrier.name}}</span>
-      <span class="phone"><strong>Call Airline:</strong>
+      <span><strong>Duration:</strong> {{duration | number: 2}} hrs</span>
+      <span class="phone"><strong>Call:</strong>
       <a href="tel:{{flightInfo.carrier.phoneNumber}}" alt="">{{flightInfo.carrier.phoneNumber}}</a></span>
     </section>
 
@@ -60,29 +61,26 @@
 
     <div class="col-sm-6 pannel departure-wrapper" ng-class="{show:(showPannel == 'departure')}">
       <section class="airport-wrapper">
+        <h2 class="timer text-center" ng-hide="takenOff">
+          <span class="title">TAKEOFF TIMER:</span>
+          <timer ng-if="loaded" end-time="{{dTime}}">{{hours}}:{{minutes}}:{{seconds}}</timer>
+        </h2>
+        <!-- {{dTime}} 1424630340000 -->
+
         <h1>{{flightInfo.departureAirport.fs}}</h1>
         <span>{{flightInfo.departureAirport.name}}</span>
         <p>
-          <span ng-show="flightInfo.airportResources.departureTerminal"><strong>Terminal:</strong> {{flightInfo.airportResources.departureTerminal}}</span>
-          <span ng-show="flightInfo.airportResources.departureGate"><strong>Gate:</strong> {{flightInfo.airportResources.departureGate}}</span>
+          <span ng-show="flightInfo.airportResources.departureTerminal">
+          <strong>Terminal:</strong> {{flightInfo.airportResources.departureTerminal}}</span>
+          <span ng-show="flightInfo.airportResources.departureGate">
+          <strong>Gate:</strong> {{flightInfo.airportResources.departureGate}}</span>
+          <span><strong>Time:</strong> {{dTime | date: 'EEE h:mm a'}}</span>
         </p>
 
-        <h3 class="alert alert-info text-center" ng-hide="takenOff">Your flight leaves in <strong>{{hoursTil}}</strong> hours!</h3>
         <p class="text-danger"ng-show="takenOff">Your flight has taken off.</p>
 
       </section>
       <section class="local-wrapper clearfix">
-        <div ng-show="international">
-          <div class="local-stat"></div>
-          <div class="local-stat"></div>
-          <div class="local-stat"></div>
-        </div>
-
-        <div id="dMap" class="map-wrapper">
-          <map ng-if="loaded"  destination="{{deplat}},{{deplon}}"></map>
-
-
-        </div>
 
         <div class="weather-wrapper">
           <div class="current">
@@ -96,10 +94,14 @@
             <span class="temp min"> {{day.temperatureMin | number: 0}}&deg;</span>
             <span class="temp max">{{day.temperatureMax | number: 0}}&deg;</span>
           </div>
+        </div>
 
+        <div id="dMap" class="map-wrapper">
+          <map ng-if="loaded"  destination="{{deplat}},{{deplon}}"></map>
         </div>
 
         <div id="directionsList" class="directions-wrapper clearfix"></div>
+
 
       </section>
       <section class="services-wrapper">
@@ -116,7 +118,7 @@
                 <td>{{item.venue.price.currency}}</td>
                 <td>{{item.venue.rating}} <span class="stars"><rating ng-model="item.venue.rating" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating></span></td>
                 <td></td>
-                <td><button ng-show="item.venue.hours.isOpen" class="btn btn-success btn-xs">Open</button></td>
+                <td><label ng-show="item.venue.hours.isOpen" class="label label-success">Open</label></td>
               </tr>
             </tbody>
           </table>
@@ -135,19 +137,11 @@
         <span>{{flightInfo.arrivalAirport.name}}</span>
         <p>
           <span><strong>Terminal:</strong> {{flightInfo.airportResources.arrivalTerminal}}</span>
+          <span><strong>Time:</strong> {{aTime | date: 'EEE h:mm a'}}</span>
         </p>
 
       </section>
       <section class="local-wrapper clearfix">
-        <div ng-show="international">
-          <div class="local-stat"></div>
-          <div class="local-stat"></div>
-          <div class="local-stat"></div>
-        </div>
-
-        <div id="aMap" class="map-wrapper">
-          <arrmap ng-if="loaded"  origin="{{arrlat}},{{arrlon}}"></arrmap>
-        </div>
 
         <div class="weather-wrapper">
           <div class="current">
@@ -163,7 +157,23 @@
           </div>
         </div>
 
+        <div id="aMap" class="map-wrapper">
+          <arrmap ng-if="loaded"  origin="{{arrlat}},{{arrlon}}"></arrmap>
+        </div>
+
         <div id="arrDirectionsList" class="directions-wrapper clearfix"></div>
+
+        <div ng-if="international">
+          <div class="local-stat">
+            <p>Local Time:</p>
+          </div>
+          <div class="local-stat">
+            <p>Language:</p>
+          </div>
+          <div class="local-stat">
+            <p>Exchange Rate:</p>
+          </div>
+        </div>
 
       </section>
       <section class="services-wrapper">
@@ -179,7 +189,7 @@
                 <td>{{item.venue.name}}</td>
                 <td>{{item.venue.price.currency}}</td>
                 <td>{{item.venue.rating}} <span class="stars"><rating ng-model="item.venue.rating" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating></span></td>
-                <td><button ng-show="item.venue.hours.isOpen" class="btn btn-success btn-xs">Open</button></td>
+                <td><label ng-show="item.venue.hours.isOpen" class="label label-success">Open</label></td>
               </tr>
             </tbody>
           </table>

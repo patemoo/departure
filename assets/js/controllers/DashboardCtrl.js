@@ -4,11 +4,11 @@ app.controller('DashboardCtrl', ['$scope','$http', function($scope,$http){ //,'u
   var d = new Date();
 
   $scope.searchData = {
-    airline: 'AS',
-    flight: '460',
+    airline: 'DL', //AS DL
+    flight: '37', //460 37
     year: d.getFullYear(),
     month: (d.getMonth()+1),
-    day: d.getDate()+1
+    day: d.getDate()
   }
 
 
@@ -19,16 +19,19 @@ app.controller('DashboardCtrl', ['$scope','$http', function($scope,$http){ //,'u
     $http.post('/api/allstats', $scope.searchData)
     .success(function(data){
 
-      $scope.loaded=true;
 
       // flight info
       $scope.flightInfo = data.flightInfo;
       $scope.statusColor = 'label label-success';
       $scope.international = (data.flightInfo.departureAirport.countryCode != data.flightInfo.arrivalAirport.countryCode) ? true : false ;
+      //$scope.countTime =
+      $scope.dTime = (new Date(data.flightInfo.operationalTimes.publishedDeparture.dateLocal)).getTime();
+      $scope.aTime = (new Date(data.flightInfo.operationalTimes.publishedArrival.dateLocal)).getTime();
       var currentTime = d.getTime();
-      var dTime = (new Date(data.flightInfo.operationalTimes.publishedDeparture.dateLocal)).getTime();
-      $scope.hoursTil = Math.round((dTime-currentTime)/3600000)
+
+      $scope.hoursTil = ($scope.dTime-currentTime)/3600000;
       $scope.takenOff = ($scope.hoursTil < 0) ? true : false ;
+      $scope.duration = data.flightInfo.flightDurations.scheduledBlockMinutes/60;
       $scope.deplat = data.flightInfo.departureAirport.latitude;
       $scope.deplon = data.flightInfo.departureAirport.longitude;
       $scope.arrlat = data.flightInfo.arrivalAirport.latitude;
@@ -48,10 +51,6 @@ app.controller('DashboardCtrl', ['$scope','$http', function($scope,$http){ //,'u
       // exchange rate
       $scope.exchange = data.exchange;
 
-      // google maps
-
-
-
       // foursquare
       $scope.depFoursquare = data.foursquare.dep.response.groups[0].items;
       console.log($scope.depFoursquare.length)
@@ -60,15 +59,15 @@ app.controller('DashboardCtrl', ['$scope','$http', function($scope,$http){ //,'u
       $scope.isReadyonly = true;
 
 
+      // load maps
+      $scope.loaded=true;
+
+
     }).error(function(err){
       alert(err);
     });
 
   }
-
-
-
-
 
 
   $scope.showPannel = 'departure';
