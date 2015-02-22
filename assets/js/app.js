@@ -10,7 +10,7 @@ app.config(['$routeProvider','$locationProvider', function($routeProvider,$locat
     templateUrl: '/views/home.html',
     controller: 'HomeCtrl'
   })
-  .when('/dashboard',{
+  .when('/flight',{
     templateUrl: '/views/dashboard.html',
     controller: 'DashboardCtrl'
   });

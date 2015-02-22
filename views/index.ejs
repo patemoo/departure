@@ -18,16 +18,15 @@
       <div collapse="isCollapsed" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/dashboard">Dashboard</a></li>
+          <li><a href="/flight">Flight</a></li>
           <li ng-hide="currentUser"><a href="#" ng-click="showModal('Login')">Login</a></li>
           <li ng-hide="currentUser"><a href="#" ng-click="showModal('Sign Up')">Sign Up</a></li>
 
           <li class="dropdown" ng-show="currentUser" dropdown>
             <a href="#" dropdown-toggle class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{currentUser.username}} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
+              <li><a href="#">My Flights</a></li>
+
               <li class="divider"></li>
               <li><a href="" ng-click="logout()">Logout</a></li>
             </ul>

@@ -2,7 +2,7 @@
   <div id="arrMap"></div>
   <div class="directions input-group" ng-show="directions || directions==undefined">
     <span class="input-group-btn">
-      <button class="clearDirections btn btn-warning" ng-click="clearDirections()" ng-disabled="arrMapContainer.$invalid">Clear</button>
+      <button type="button" class="clearDirections btn btn-warning" ng-click="clearDirections()" ng-disabled="arrMapContainer.$invalid">Clear</button>
     </span>
     <input type="text" class="form-control" ng-model="destination" placeholder="Destination:" required>
     <div class="input-group-btn">

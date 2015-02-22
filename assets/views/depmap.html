@@ -3,7 +3,7 @@
 
   <div class="directions input-group" ng-show="directions || directions==undefined">
     <span class="input-group-btn">
-      <button class="clearDirections btn btn-warning" ng-click="clearDirections()" ng-disabled="mapContainer.$invalid">Clear</button>
+      <button type="button" class="clearDirections btn btn-warning" ng-click="clearDirections()" ng-disabled="mapContainer.$invalid">Clear</button>
     </span>
     <input type="text" class="form-control" ng-model="origin" placeholder="Current Location:" required/>
     <span class="input-group-btn">
