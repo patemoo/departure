@@ -62,8 +62,8 @@ module.exports = function(grunt) {
 		}
 	}
 
-
-
+	// for grunt-contrib-sass
+	grunt.loadNpmTasks('grunt-contrib-sass');
 
 	// Load task functions
 	var taskConfigurations = loadTasks('./tasks/config'),
