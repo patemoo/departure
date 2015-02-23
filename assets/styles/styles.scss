@@ -190,6 +190,9 @@ h1, h2 {
     color: $mapred;
     font-size: 66px;
     line-height: 100%;
+    @media screen and (max-width: 420px) {
+      font-size: 58px;
+    }
   }
   h2.timer{
     margin: 0;
