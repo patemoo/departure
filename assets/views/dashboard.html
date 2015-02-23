@@ -63,9 +63,8 @@
       <section class="airport-wrapper">
         <h2 class="timer text-center" ng-hide="takenOff">
           <span class="title">TAKEOFF TIMER:</span>
-          <timer ng-if="loaded" end-time="{{dTime}}">{{hours}}:{{minutes}}:{{seconds}}</timer>
+          <timer ng-if="loaded" end-time="{{dTime}}">{{days}}:{{hours}}:{{minutes}}:{{seconds}}</timer>
         </h2>
-        <!-- {{dTime}} 1424630340000 -->
 
         <h1>{{flightInfo.departureAirport.fs}}</h1>
         <span>{{flightInfo.departureAirport.name}}</span>

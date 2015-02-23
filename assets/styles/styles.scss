@@ -196,6 +196,9 @@ h1, h2 {
     float: right;
     font-size: 32px;
     letter-spacing: 3px;
+    @media screen and (max-width: 420px) {
+      font-size: 25px;
+    }
     span.title{
       font-size: 10px;
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
