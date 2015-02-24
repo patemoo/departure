@@ -13,8 +13,8 @@ app.controller('DashboardCtrl', ['$scope','$http','$routeParams','UserService', 
   var d = new Date();
 
   $scope.searchData = {
-    airline: 'DL', //AS DL
-    flight: '37', //460 37
+    airline: '', //AS DL
+    flight: '', //460 37
     year: d.getFullYear().toString(),
     month: (d.getMonth()+1).toString(),
     day: d.getDate().toString()
@@ -33,11 +33,9 @@ app.controller('DashboardCtrl', ['$scope','$http','$routeParams','UserService', 
       $scope.flightInfo = data.flightInfo;
       $scope.statusColor = 'label label-success';
       $scope.international = (data.flightInfo.departureAirport.countryCode != data.flightInfo.arrivalAirport.countryCode) ? true : false ;
-      //$scope.countTime =
       $scope.dTime = (new Date(data.flightInfo.operationalTimes.publishedDeparture.dateLocal)).getTime();
       $scope.aTime = (new Date(data.flightInfo.operationalTimes.publishedArrival.dateLocal)).getTime();
       var currentTime = d.getTime();
-
       $scope.hoursTil = ($scope.dTime-currentTime)/3600000;
       $scope.takenOff = ($scope.hoursTil < 0) ? true : false ;
       $scope.duration = data.flightInfo.flightDurations.scheduledBlockMinutes/60;
@@ -45,6 +43,7 @@ app.controller('DashboardCtrl', ['$scope','$http','$routeParams','UserService', 
       $scope.deplon = data.flightInfo.departureAirport.longitude;
       $scope.arrlat = data.flightInfo.arrivalAirport.latitude;
       $scope.arrlon = data.flightInfo.arrivalAirport.longitude;
+      $scope.arrLocal = (new Date(data.flightInfo.arrivalAirport.localTime)).getTime();
 
       // weather data
       // departure
@@ -57,15 +56,18 @@ app.controller('DashboardCtrl', ['$scope','$http','$routeParams','UserService', 
       $scope.arrTemp = Math.round(data.forecast.arr.currently.temperature);
       $scope.arrDaily = data.forecast.arr.daily.data
 
-      // exchange rate
-      $scope.exchange = data.exchange;
-
       // foursquare
       $scope.depFoursquare = data.foursquare.dep.response.groups[0].items;
       console.log($scope.depFoursquare.length)
       $scope.arrFoursquare = data.foursquare.arr.response.groups[0].items;
       $scope.max = 10;
       $scope.isReadyonly = true;
+      var currency = data.foursquare.arr.response.groups[0].items[0];
+
+      // exchange rate
+      $scope.exchange = data.exchange.rates;
+      console.log($scope.exchange);
+      console.log(currency);
 
 
       // load maps

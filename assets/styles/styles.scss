@@ -65,6 +65,44 @@ body{
   }
 }
 
+.screen-wrapper{
+  position: relative;
+  border-bottom: 5px solid rgba(255,255,255,.6);
+  h1 {
+    color: #fff;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    text-shadow: 2px 2px 2px #333 ;
+  }
+  .desktop{
+    display: block;
+    margin: 50px auto 0;
+    z-index: 5;
+    width: 80%;
+    max-width: 500px
+  }
+  .iphone{
+    position: absolute;
+    z-index: 10;
+    width: 20%;
+    max-width: 100px;
+    bottom: 0;
+    right: 19%;
+    @media screen and (min-width: 1200px) {
+      right: 24%;
+    }
+    @media screen and (max-width: 992px) {
+      right: 10%;
+    }
+  }
+}
+.button-wrapper{
+  position: relative;
+  margin: 40px 0;
+  a{
+    // display:block;
+  }
+}
+
 h1, h2 {
   font-family: "mplus-1m",sans-serif;
   }
