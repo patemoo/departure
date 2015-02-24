@@ -1,5 +1,14 @@
-app.controller('DashboardCtrl', ['$scope','$http', function($scope,$http){ //,'uiGmapGoogleMapApi'
+app.controller('DashboardCtrl', ['$scope','$http','$routeParams','UserService', function($scope,$http,$routeParams,UserService){
 
+
+  if ($routeParams.airline) {
+    $scope.params = $routeParams;
+  }
+
+  $scope.UserService = UserService;
+  $scope.$watchCollection('UserService', function(){
+    $scope.currentUser = UserService.currentUser;
+  });
 
   var d = new Date();
 
@@ -11,7 +20,6 @@ app.controller('DashboardCtrl', ['$scope','$http', function($scope,$http){ //,'u
     day: d.getDate()
   }
 
-
   $scope.loaded=false;
 
   $scope.findFlight = function() {
@@ -19,6 +27,7 @@ app.controller('DashboardCtrl', ['$scope','$http', function($scope,$http){ //,'u
     $http.post('/api/allstats', $scope.searchData)
     .success(function(data){
 
+      $routeParams = $scope.searchData;
 
       // flight info
       $scope.flightInfo = data.flightInfo;
@@ -67,6 +76,11 @@ app.controller('DashboardCtrl', ['$scope','$http', function($scope,$http){ //,'u
       alert(err);
     });
 
+  }
+
+  if ($routeParams.airline) {
+    $scope.searchData = $routeParams;
+    $scope.findFlight();
   }
 
 

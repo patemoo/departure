@@ -3,7 +3,7 @@
 
   <!-- === Search Wrapper === -->
 
-  <div class="container search-wrapper" ng-hide="flightInfo">
+  <div class="container search-wrapper" ng-hide="flightInfo || params">
 
     <form class="form-inline text-center" ng-submit="findFlight()">
       <div class="form-group">
@@ -38,10 +38,12 @@
 
   <div class="container" ng-if="loaded">
     <section class="flight-wrapper clearfix">
-      <span class="status" ng-class="statusColor">FLIGHT STATUS</span>
+      <span class="status" ng-class="statusColor">STATUS</span>
+      <button class="btn btn-primary btn-xs save" ng-show="currentUser">save</button>
       <span><strong>Flight #:</strong> {{flightInfo.flightNumber}}</span>
       <span><strong>Airline:</strong> {{flightInfo.carrier.name}}</span>
       <span><strong>Duration:</strong> {{duration | number: 2}} hrs</span>
+
       <span class="phone"><strong>Call:</strong>
       <a href="tel:{{flightInfo.carrier.phoneNumber}}" alt="">{{flightInfo.carrier.phoneNumber}}</a></span>
     </section>

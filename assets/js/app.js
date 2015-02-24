@@ -13,6 +13,10 @@ app.config(['$routeProvider','$locationProvider', function($routeProvider,$locat
   .when('/flight',{
     templateUrl: '/views/dashboard.html',
     controller: 'DashboardCtrl'
-  });
+  })
+  .when('/flight/:airline/:flight/:year/:month/:day',{
+    templateUrl: '/views/dashboard.html',
+    controller: 'DashboardCtrl'
+  })
 
 }]);

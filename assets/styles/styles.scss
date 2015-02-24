@@ -102,18 +102,25 @@ h1, h2 {
     padding: 10px 15px;
     span{
       margin-right: 20px;
-      @media screen and (max-width: 700px) {
+      clear: none;
+      @media screen and (max-width: 768px) {
         float: left;
-
+        margin-right: 40px;
+      }
+      @media screen and (max-width: 420px) {
+        margin-right: 60px;
       }
     }
     .phone{
       float: right;
-      margin-right: 0px;
-      @media screen and (max-width: 700px) {
+      clear: none;
+      @media screen and (max-width: 768px) {
         float: left;
         clear: left;
       }
+    }
+    .save{
+      float: right;
     }
   }
   .toggle-wrapper{

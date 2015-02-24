@@ -10,6 +10,7 @@ var async = require('async');
 
 module.exports = {
 
+
   getAll: function(req,res){
 
     console.log(req.body)
