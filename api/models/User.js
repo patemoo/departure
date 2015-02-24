@@ -25,6 +25,10 @@ module.exports = {
 
     /// associations
 
+    saves: {
+      collection: 'Save',
+      via: 'owner'
+    },
 
     /// instance methods
     toJSON: function(){

@@ -15,9 +15,9 @@ app.controller('DashboardCtrl', ['$scope','$http','$routeParams','UserService', 
   $scope.searchData = {
     airline: 'DL', //AS DL
     flight: '37', //460 37
-    year: d.getFullYear(),
-    month: (d.getMonth()+1),
-    day: d.getDate()
+    year: d.getFullYear().toString(),
+    month: (d.getMonth()+1).toString(),
+    day: d.getDate().toString()
   }
 
   $scope.loaded=false;
@@ -76,6 +76,16 @@ app.controller('DashboardCtrl', ['$scope','$http','$routeParams','UserService', 
       alert(err);
     });
 
+  }
+
+  $scope.saveFlight = function() {
+    console.log($scope.searchData);
+    $http.post('/api/save',$scope.searchData).success(function(data){
+      alert('Flight Saved!');
+      console.log('data', data);
+    }).error(function(err){
+      alert(err);
+    })
   }
 
   if ($routeParams.airline) {

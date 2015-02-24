@@ -13,7 +13,7 @@ module.exports = {
 
   getAll: function(req,res){
 
-    console.log(req.body)
+    console.log(req.body);
 
     var result = {};
     var flightStats = {};
@@ -29,9 +29,9 @@ module.exports = {
     Flight.findOne({
       airline:req.body.airline,
       flight:req.body.flight,
-      year:req.body.year.toString(),
-      month:req.body.month.toString(),
-      day:req.body.day.toString()
+      year:req.body.year,
+      month:req.body.month,
+      day:req.body.day
     })
 
     .exec(function(err, found){
@@ -39,6 +39,7 @@ module.exports = {
       if (found) {
 
         console.log('Flight Found in DB')
+
 
         flightStats = JSON.parse(found.body).flightStatuses[0];
 
