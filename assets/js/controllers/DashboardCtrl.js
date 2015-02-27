@@ -1,4 +1,4 @@
-app.controller('DashboardCtrl', ['$scope','$http','$routeParams','UserService', function($scope,$http,$routeParams,UserService){
+app.controller('DashboardCtrl', ['$scope','$http','$location','$routeParams','UserService', function($scope,$http,$location,$routeParams,UserService){
 
 
   if ($routeParams.airline) {
@@ -13,21 +13,26 @@ app.controller('DashboardCtrl', ['$scope','$http','$routeParams','UserService', 
   var d = new Date();
 
   $scope.searchData = {
-    airline: '', //AS DL
-    flight: '', //460 37
+    airline: 'DL', //AS DL
+    flight: '37', //460 37
     year: d.getFullYear().toString(),
     month: (d.getMonth()+1).toString(),
     day: d.getDate().toString()
   }
 
-  $scope.loaded=false;
+  $scope.loaded = false;
 
   $scope.findFlight = function() {
 
     $http.post('/api/allstats', $scope.searchData)
     .success(function(data){
 
-      $routeParams = $scope.searchData;
+      $location.path('/flight/'+
+        $scope.searchData.airline+'/'+
+        $scope.searchData.flight+'/'+
+        $scope.searchData.year+'/'+
+        $scope.searchData.month+'/'+
+        $scope.searchData.day);
 
       // flight info
       $scope.flightInfo = data.flightInfo;
@@ -78,16 +83,6 @@ app.controller('DashboardCtrl', ['$scope','$http','$routeParams','UserService', 
       alert(err);
     });
 
-  }
-
-  $scope.saveFlight = function() {
-    console.log($scope.searchData);
-    $http.post('/api/save',$scope.searchData).success(function(data){
-      alert('Flight Saved!');
-      console.log('data', data);
-    }).error(function(err){
-      alert(err);
-    })
   }
 
   if ($routeParams.airline) {

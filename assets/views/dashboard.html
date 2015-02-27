@@ -1,41 +1,5 @@
 <div class="dashboard-wrapper">
 
-
-  <!-- === Search Wrapper === -->
-
-  <div class="container search-wrapper" ng-hide="flightInfo || params">
-
-    <form class="form-inline text-center" ng-submit="findFlight()">
-      <div class="form-group">
-        <input type="text" class="form-control" ng-model="searchData.airline" placeholder="Airline" required>
-        <input type="text" class="form-control" ng-model="searchData.flight" placeholder="Flight Number" required>
-        <input type="text" class="form-control year" ng-model="searchData.year" placeholder="Year">
-        <select class="form-control" ng-model="searchData.month">
-          <option value="1">January</option>
-          <option value="2">February</option>
-          <option value="3">March</option>
-          <option value="4">April</option>
-          <option value="5">May</option>
-          <option value="6">June</option>
-          <option value="7">July</option>
-          <option value="8">August</option>
-          <option value="9">September</option>
-          <option value="10">October</option>
-          <option value="11">November</option>
-          <option value="12">December</option>
-        </select>
-        <input type="text" class="form-control day" ng-model="searchData.day" placeholder="Day">
-        <input type="submit" class="btn btn-success" value="Get Info">
-      </div>
-    </form>
-
-  </div>
-
-
-
-
-
-
   <div class="container" ng-if="loaded">
     <section class="flight-wrapper clearfix">
       <span class="status" ng-class="statusColor">STATUS</span>
@@ -43,7 +7,6 @@
       <span><strong>Flight #:</strong> {{flightInfo.flightNumber}}</span>
       <span><strong>Airline:</strong> {{flightInfo.carrier.name}}</span>
       <span><strong>Duration:</strong> {{duration | number: 2}} hrs</span>
-
       <span class="phone"><strong>Call:</strong>
       <a href="tel:{{flightInfo.carrier.phoneNumber}}" alt="">{{flightInfo.carrier.phoneNumber}}</a></span>
     </section>
@@ -56,7 +19,6 @@
         <span class="arrival" ng-click="togglePannel('arrival')" ng-class="{show:(showPannel == 'arrival')}">Arrival</span>
       </div>
     </section>
-
 
 
   <!-- === Departure Wrapper === -->
@@ -106,8 +68,6 @@
 
       </section>
       <section class="services-wrapper">
-        <!-- <h3>Directions</h3> -->
-        <div id="directionsList"></div>
 
         <h3>Airport Eats</h3>
         <section class="food-wrapper">
@@ -127,7 +87,6 @@
 
       </section>
     </div>
-
 
 
   <!-- === Arrival Wrapper === -->
@@ -179,7 +138,6 @@
 
       </section>
       <section class="services-wrapper">
-        <!-- <h3>Directions</h3> -->
 
 
         <h3>Airport Eats</h3>
@@ -201,8 +159,6 @@
     </div>
 
   </div>
-
-
 
 </div> <!-- end dashboard-wrapper -->
 

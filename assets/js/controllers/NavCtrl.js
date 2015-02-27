@@ -19,6 +19,16 @@ app.controller('NavCtrl', ['$scope','$location','$modal','UserService', function
     })
   }
 
+  $scope.navShow = false;
+  $scope.location = $location;
+  $scope.$watchCollection('location', function(){
+    if ($location.path().length > 7) {
+      $scope.navShow = true;
+    } else {
+      $scope.navShow = false;
+    }
+  });
+
   $scope.logout = function(){
     UserService.logout(function(err, data){
 

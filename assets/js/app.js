@@ -11,7 +11,7 @@ app.config(['$routeProvider','$locationProvider', function($routeProvider,$locat
     controller: 'HomeCtrl'
   })
   .when('/flight',{
-    templateUrl: '/views/dashboard.html',
+    templateUrl: '/views/search.html',
     controller: 'DashboardCtrl'
   })
   .when('/flight/:airline/:flight/:year/:month/:day',{
