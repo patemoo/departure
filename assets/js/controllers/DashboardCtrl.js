@@ -13,8 +13,8 @@ app.controller('DashboardCtrl', ['$scope','$http','$location','$routeParams','Us
   var d = new Date();
 
   $scope.searchData = {
-    airline: 'DL', //AS DL
-    flight: '37', //460 37
+    airline: '', //AS DL
+    flight: '', //460 37
     year: d.getFullYear().toString(),
     month: (d.getMonth()+1).toString(),
     day: d.getDate().toString()
