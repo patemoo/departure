@@ -61,29 +61,39 @@ module.exports = {
 
             result = JSON.parse(body);
 
-            Flight.create({
-              flightId: result.flightStatuses[0].flightId,
-              airline: result.request.airline.requestedCode,
-              flight: result.request.flight.requested,
-              year: result.request.date.year,
-              month: result.request.date.month,
-              day: result.request.date.day,
-              body: body
-            }).exec(function(err,created){
-              if (created) {
-                console.log('Flight create with id: '+created.flightId);
-              }
-            })
+            if (result.error && result.error.errorMessage) {
 
-            flightStats = result.flightStatuses[0];
+              res.send({error: result.error.errorMessage });
 
-            deplat = flightStats.departureAirport.latitude;
-            deplon = flightStats.departureAirport.longitude;
-            arrlat = flightStats.arrivalAirport.latitude;
-            arrlon = flightStats.arrivalAirport.longitude;
+            } else {
 
-            continueAll();
+              Flight.create({
+                flightId: result.flightStatuses[0].flightId,
+                airline: result.request.airline.requestedCode,
+                flight: result.request.flight.requested,
+                year: result.request.date.year,
+                month: result.request.date.month,
+                day: result.request.date.day,
+                body: body
+              }).exec(function(err,created){
+                if (created) {
+                  console.log('Flight create with id: '+created.flightId);
+                }
+              })
 
+              flightStats = result.flightStatuses[0];
+
+              deplat = flightStats.departureAirport.latitude;
+              deplon = flightStats.departureAirport.longitude;
+              arrlat = flightStats.arrivalAirport.latitude;
+              arrlon = flightStats.arrivalAirport.longitude;
+
+              continueAll();
+
+            }
+
+          } else {
+            res.send({error: 'Flight not found!'});
           }
 
 
