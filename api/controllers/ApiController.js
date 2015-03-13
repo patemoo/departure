@@ -125,15 +125,15 @@ module.exports = {
             }
           })
         },
-        // exchange: function(callback){
+        exchange: function(callback){
         // get exchange rate
-        //   request(('http://openexchangerates.org/api/latest.json?app_id='+process.env.OPEN_EXCHANGE_RATES_KEY), function (error, response, body) {
-        //     if (!error && response.statusCode == 200) {
-        //       exchange = JSON.parse(body);
-        //       callback(null, exchange);
-        //     }
-        //   });
-        // },
+          request(('http://openexchangerates.org/api/latest.json?app_id='+process.env.OPEN_EXCHANGE_RATES_KEY), function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+              exchange = JSON.parse(body);
+              callback(null, exchange);
+            }
+          });
+        },
         depFoursquare: function(callback){
           // get foursquare venues
           // https://api.foursquare.com/v2/venues/explore?client_id=KL4M5L1JVEKQY5OFTGUEB43WQYOI2L3TIBEYL23BVHX2QQQW&client_secret=RWLMX1HFXWSU3JIIFEDFPXQXHJI2ZITAA1P2QEXGSPEN1LOT&ll=40.7,-74&query=sushi&v=20140806&m=foursquare
