@@ -34,12 +34,12 @@ module.exports.routes = {
 
   '/': 'PagesController.index',
 
-  'post /api/auth':'AuthController.login',
-  'delete /api/auth':'AuthController.logout',
-  'get /api/auth':'AuthController.check',
+  // 'post /api/auth':'AuthController.login',
+  // 'delete /api/auth':'AuthController.logout',
+  // 'get /api/auth':'AuthController.check',
 
   'post /api/allstats':'ApiController.getAll',
-  'post /api/save':'SaveController.create',
+  // 'post /api/save':'SaveController.create',
 
   'get *':{
     controller:"PagesController",
