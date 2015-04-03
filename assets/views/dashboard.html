@@ -52,7 +52,7 @@
             <img ng-src="/images/{{depCurrent.icon || default }}.svg" alt="weather icon"/>
           </div>
           <div class="week clearfix" ng-repeat="day in depDaily | limitTo: 5 ">
-            <span class="day">{{ (day.time * 1000) | date:'EEE' : 'UTC'}}</span>
+            <span class="day">{{ (day.time * 1000) | date:'EEE'}}</span>
             <img class="icon" ng-src="/images/{{day.icon}}.svg" alt="">
             <span class="temp min text-info"> {{day.temperatureMin | number: 0}}&deg;</span>
             <span class="temp max text-warning">{{day.temperatureMax | number: 0}}&deg;</span>
@@ -110,7 +110,7 @@
             <img ng-src="/images/{{ arrCurrent.icon || default }}.svg" alt="weather icon"/>
           </div>
           <div class="week clearfix" ng-repeat="day in arrDaily | limitTo: 5 ">
-            <span class="day">{{ (day.time * 1000) | date:'EEE' : 'UTC' }}</span>
+            <span class="day">{{ (day.time * 1000) | date:'EEE'}}</span>
             <img class="icon" ng-src="/images/{{day.icon}}.svg" alt="">
             <span class="temp min text-info"> {{day.temperatureMin | number: 0}}&deg;</span>
             <span class="temp max text-warning">{{day.temperatureMax | number: 0}}&deg;</span>
