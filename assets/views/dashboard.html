@@ -37,10 +37,10 @@
           <strong>Terminal:</strong> {{flightInfo.airportResources.departureTerminal}}</span>
           <span ng-show="flightInfo.airportResources.departureGate">
           <strong>Gate:</strong> {{flightInfo.airportResources.departureGate}}</span>
-          <span><strong>Time:</strong> {{dTime | date: 'EEE h:mm a' : 'UTC'}}</span>
+          <span><strong>Time:</strong> {{dTime | date: 'EEE h:mm a'}}</span>
         </p>
 
-        <p class="text-danger"ng-show="takenOff">Your flight has taken off.</p>
+        <p class="text-danger" ng-show="takenOff">Your flight has taken off.</p>
 
       </section>
       <section class="local-wrapper clearfix">

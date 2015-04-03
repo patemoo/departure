@@ -44,7 +44,7 @@ app.controller('DashboardCtrl', ['$scope','$http','$location','$routeParams','Us
         $scope.flightInfo = data.flightInfo;
         $scope.statusColor = 'label label-success';
         $scope.international = (data.flightInfo.departureAirport.countryCode != data.flightInfo.arrivalAirport.countryCode) ? true : false ;
-        $scope.dTime = (new Date(data.flightInfo.operationalTimes.publishedDeparture.dateLocal)).getTime();
+        $scope.dTime = (new Date(data.flightInfo.operationalTimes.publishedDeparture.dateUtc)).getTime();
         $scope.aTime = (new Date(data.flightInfo.operationalTimes.publishedArrival.dateLocal)).getTime();
         var currentTime = d.getTime();
         $scope.hoursTil = ($scope.dTime-currentTime)/3600000;
