@@ -37,7 +37,7 @@
           <strong>Terminal:</strong> {{flightInfo.airportResources.departureTerminal}}</span>
           <span ng-show="flightInfo.airportResources.departureGate">
           <strong>Gate:</strong> {{flightInfo.airportResources.departureGate}}</span>
-          <span><strong>Time:</strong> {{dTime | date: 'EEE h:mm a'}}</span>
+          <span><strong>Time:</strong> {{dTime | date: 'EEE h:mm a' : 'UTC'}}</span>
         </p>
 
         <p class="text-danger"ng-show="takenOff">Your flight has taken off.</p>
@@ -52,7 +52,7 @@
             <img ng-src="/images/{{depCurrent.icon || default }}.svg" alt="weather icon"/>
           </div>
           <div class="week clearfix" ng-repeat="day in depDaily | limitTo: 5 ">
-            <span class="day">{{ (day.time * 1000) | date:'EEE' }}</span>
+            <span class="day">{{ (day.time * 1000) | date:'EEE' : 'UTC'}}</span>
             <img class="icon" ng-src="/images/{{day.icon}}.svg" alt="">
             <span class="temp min text-info"> {{day.temperatureMin | number: 0}}&deg;</span>
             <span class="temp max text-warning">{{day.temperatureMax | number: 0}}&deg;</span>
@@ -97,7 +97,7 @@
         <span>{{flightInfo.arrivalAirport.name}}</span>
         <p>
           <span><strong>Terminal:</strong> {{flightInfo.airportResources.arrivalTerminal}}</span>
-          <span><strong>Time:</strong> {{aTime | date: 'EEE h:mm a'}}</span>
+          <span><strong>Time:</strong> {{aTime | date: 'EEE h:mm a' : 'UTC'}}</span>
         </p>
 
       </section>
@@ -110,7 +110,7 @@
             <img ng-src="/images/{{ arrCurrent.icon || default }}.svg" alt="weather icon"/>
           </div>
           <div class="week clearfix" ng-repeat="day in arrDaily | limitTo: 5 ">
-            <span class="day">{{ (day.time * 1000) | date:'EEE' }}</span>
+            <span class="day">{{ (day.time * 1000) | date:'EEE' : 'UTC' }}</span>
             <img class="icon" ng-src="/images/{{day.icon}}.svg" alt="">
             <span class="temp min text-info"> {{day.temperatureMin | number: 0}}&deg;</span>
             <span class="temp max text-warning">{{day.temperatureMax | number: 0}}&deg;</span>
