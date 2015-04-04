@@ -42,7 +42,6 @@ app.controller('DashboardCtrl', ['$scope','$http','$location','$routeParams','Us
 
         // flight info
         $scope.flightInfo = data.flightInfo;
-        $scope.statusColor = 'label label-success';
         $scope.international = (data.flightInfo.departureAirport.countryCode != data.flightInfo.arrivalAirport.countryCode) ? true : false ;
         $scope.dTime = (new Date(data.flightInfo.operationalTimes.publishedDeparture.dateUtc)).getTime();
         $scope.aTime = (new Date(data.flightInfo.operationalTimes.publishedArrival.dateLocal)).getTime();
@@ -55,6 +54,36 @@ app.controller('DashboardCtrl', ['$scope','$http','$location','$routeParams','Us
         $scope.arrlat = data.flightInfo.arrivalAirport.latitude;
         $scope.arrlon = data.flightInfo.arrivalAirport.longitude;
         $scope.arrLocal = (new Date(data.flightInfo.arrivalAirport.localTime)).getTime();
+        var statusLetter = data.flightInfo.status;
+
+        switch(statusLetter) {
+          case 'A':
+            $scope.status = 'Active';
+            $scope.statusColor = 'label label-success';
+            break;
+          case 'C':
+            $scope.status = 'Canceled';
+            $scope.statusColor = 'label label-danger';
+            break;
+          case 'D':
+            $scope.status = 'Diverted';
+            $scope.statusColor = 'label label-info';
+            break;
+          case 'L':
+            $scope.status = 'Landed';
+            $scope.statusColor = 'label label-success';
+            break;
+          case 'R':
+            $scope.status = 'Redirected';
+            $scope.statusColor = 'label label-info';
+            break;
+          case 'S':
+            $scope.status = 'Scheduled';
+            $scope.statusColor = 'label label-success';
+            break;
+          default:
+            $scope.status = false;
+        }
 
         // weather data
         // departure

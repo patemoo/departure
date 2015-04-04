@@ -2,7 +2,7 @@
 
   <div class="container" ng-if="loaded">
     <section class="flight-wrapper clearfix">
-      <span class="status" ng-class="statusColor">STATUS</span>
+      <span class="status" ng-class="statusColor" ng-show="status">Status: {{status}}</span>
       <button class="btn btn-primary btn-xs save" ng-show="currentUser" ng-click="saveFlight()">save</button>
       <span><strong>Flight #:</strong> {{flightInfo.flightNumber}}</span>
       <span><strong>Airline:</strong> {{flightInfo.carrier.name}}</span>
